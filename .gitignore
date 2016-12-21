@@ -1,4 +1,5 @@
 app/*.js
+app/*.js.map
 *.css
 node_modules
 platforms
