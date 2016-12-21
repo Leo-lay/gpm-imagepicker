@@ -1,0 +1,18 @@
+<StackLayout class="p-20">
+    <Label text="Tap the button" class="h1 text-center"></Label>
+    <Button text="TAP" (tap)="onTap()" class="btn btn-primary btn-active"></Button>
+    <GridLayout>
+        <RadListView [items]="imageList" multipleSelection="true" selectionBehavior="Press" (itemSelected)="itemSelected($event)"  (itemDeselected)="itemDeselected($event)">
+            <template tkListItemTemplate let-item="item" class="m-t-20">
+                <GridLayout class="gridLayoutStyle" rows="*,20" columns="*">
+                    <FrescoDrawee #drawee  showProgressBar="false" verticalAlignment="center" placeholderImageUri="~/images/good.png" aspectRatio="2" width="94" height="94"
+                        [imageUri]="item.fileUri" failureImageUri="~/images/error.png"></FrescoDrawee>
+                    <!--<Image width="94" height="94" [src]="item.fileUri"></Image>-->
+                    <!--<Image width="94" height="94" src="http://img5.duitang.com/uploads/item/201508/10/20150810225654_XS4hU.thumb.700_0.jpeg"></Image>-->
+                    <Label row="1" [text]="item.text"></Label>
+                </GridLayout>
+            </template>
+            <ListViewGridLayout tkListViewLayout scrollDirection="Vertical" spanCount="3"></ListViewGridLayout>
+        </RadListView>
+    </GridLayout>
+</StackLayout>
