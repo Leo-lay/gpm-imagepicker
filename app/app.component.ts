@@ -10,7 +10,6 @@ import * as application from 'application';
 import fresco = require("nativescript-fresco");
 import { ListViewEventData } from 'nativescript-telerik-ui/listview'
 import { path, knownFolders, Folder } from 'file-system';
-import { images } from './images';
 
 
 var Intent = android.content.Intent;
@@ -68,24 +67,6 @@ export class AppComponent {
     public onTap() {
         console.log('Button (tap)');
         this.imageList = this.getGalleryPhotos();
-        // let templateList = [];
-        // images.forEach(img => {
-        //     templateList.push(img);
-        // });
-        // let templateList = [];
-        // images.forEach(img => {
-        //     console.log('image.forEach =>', JSON.stringify(img));
-        //     let imgPath  = path.join(img.uri);
-        //     let imgFile = new java.io.File(img.uri);
-        //     let uri = android.net.Uri.parse(imgFile);
-        //      img.fileUri = imgPath;
-        //     // img.imageSource = this.decodeThumbUri(img.uri);
-        //     console.log('onTap =>', JSON.stringify(img));
-        //     templateList.push(img);
-
-        // });
-        // this.imageList = templateList;
-        // console.log('imageList', JSON.stringify(this.imageList));
     }
 
 
