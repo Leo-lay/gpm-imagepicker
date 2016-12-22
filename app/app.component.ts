@@ -71,41 +71,56 @@ export class AppComponent {
 
 
     getGalleryPhotos() {
-        let MediaStore = android.provider.MediaStore;
+        // let MediaStore = android.provider.MediaStore;
         console.log('getGalleryPhotos')
         let photoList: Array<any> = [];
         let cursor = null;
         // query columns
         //try {
-            // let columns = [android.provider.MediaStore.Images.Media.DATA,
-            // android.provider.MediaStore.Images.Media._ID];
-            let columns = [MediaStore.MediaColumns.DATA];
-            console.log('here ==============');
-            // sort by _id
-            let order_by = MediaStore.Images.Media._ID;
-            let uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-            // get android cursor
-            console.log('here ==============uri', uri);
-            let provider = this.getContentResolver();
-            console.log('here ==============provider', provider);
-            cursor = provider.query(uri, columns, null, null, null);
-            console.log('cursor =>', JSON.stringify(cursor));
-            console.log('cursor getCount', cursor.getCount());
-            if (cursor && cursor.getCount() > 0) {
-                console.log('cursor moveToNext=>', cursor.moveToNext());
-                while (cursor.moveToNext()) {
-                    // let imagePicker = new ImagePicker();
-                    let column_index = cursor.getColumnIndex(MediaStore.MediaColumns.DATA);
-                    let imageUri = cursor.getString(column_index) + '';
-                    let name = imageUri.substring(imageUri.lastIndexOf('.'));
-                    let imgPath = path.join(imageUri);
-                    console.log('get image uri =>',imageUri);
-                    // let imagesource = this.decodeThumbUri(imageUri);
-                    let image  = {fileUri:imageUri, text:name};
-                    photoList.push(image);
-                }
+        // let columns = [android.provider.MediaStore.Images.Media.DATA,
+        // android.provider.MediaStore.Images.Media._ID];
+        let columns = [MediaStore.MediaColumns.DATA];
+        console.log('here ==============');
+        // sort by _id
+        let order_by = MediaStore.Images.Media._ID;
+        let uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+        // get android cursor
+        console.log('here ==============uri', uri);
+        let provider = this.getContentResolver();
+        console.log('here ==============provider', provider);
+        cursor = provider.query(uri, columns, null, null, null);
+        console.log('cursor =>', JSON.stringify(cursor));
+        console.log('cursor getCount', cursor.getCount());
+        if (cursor && cursor.getCount() > 0) {
+            console.log('cursor moveToNext=>', cursor.moveToNext());
+            while (cursor.moveToNext()) {
+                // let imagePicker = new ImagePicker();
+                let column_index = cursor.getColumnIndex(MediaStore.MediaColumns.DATA);
+                let imageUri = cursor.getString(column_index) + '';
+                let name = imageUri.substring(imageUri.lastIndexOf('.'));
+                let imgPath = path.join(imageUri);
+                console.log('get image uri =>', imageUri);
+                /**
+                 * 
+                 * follow code
+                 * let imagesource = this.decodeThumbUri(imageUri);
+                 * i get that from the plugin nativescript-imagePicker
+                 * and i want to do the same thing that to scale image ,but when i call the 
+                 * method  i got error 
+                 * 
+                 * W/System.err(  916): 	at com.tns.Runtime.dispatchCallJSMethodNative(Runtime.java:1022)
+                 * W/System.err(  916): 	at com.tns.Runtime.callJSMethodImpl(Runtime.java:907)
+                 * W/System.err(  916): 	at com.tns.Runtime.callJSMethod(Runtime.java:895)
+                 * W/System.err(  916): 	at com.tns.Runtime.callJSMethod(Runtime.java:879)
+                 * W/System.err(  916): 	at com.tns.Runtime.callJSMethod(Runtime.java:871)
+                 * 
+                 */
+                /// 
+                let image = { fileUri: imageUri, text: name };
+                photoList.push(image);
             }
-            return photoList;
+        }
+        return photoList;
         // } catch (error) {
         //     console.log('getGalleryPhotos=>', JSON.stringify(error));
         //     return undefined;
